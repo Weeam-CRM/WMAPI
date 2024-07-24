@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\InvoiceController;
 use App\Http\Controllers\API\InvoiceItemController;
+use App\Http\Controllers\DeveloperController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,5 +32,13 @@ Route::middleware('auth:sanctum')->group(function () {
     // Route::apiResource('invoices', InvoiceController::class);
     // Route::apiResource('invoices.items', InvoiceItemController::class);
 });
+## Invoices
 Route::apiResource('invoices', InvoiceController::class);
 Route::apiResource('invoices.items', InvoiceItemController::class);
+
+## Developers
+Route::get('developers', [DeveloperController::class, 'index']);
+Route::post('developers', [DeveloperController::class, 'store']);
+Route::get('developers/{id}', [DeveloperController::class, 'show']);
+Route::put('developers/{id}', [DeveloperController::class, 'update']);
+Route::delete('developers/{id}', [DeveloperController::class, 'destroy']);
