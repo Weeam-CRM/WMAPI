@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\InvoiceController;
 use App\Http\Controllers\API\InvoiceItemController;
+use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\DeveloperController;
 
 
@@ -42,3 +43,10 @@ Route::post('developers', [DeveloperController::class, 'store']);
 Route::get('developers/{id}', [DeveloperController::class, 'show']);
 Route::put('developers/{id}', [DeveloperController::class, 'update']);
 Route::delete('developers/{id}', [DeveloperController::class, 'destroy']);
+
+## Bank Accounts
+Route::get('bank_accounts', [BankAccountController::class, 'index']);
+Route::post('bank_accounts', [BankAccountController::class, 'store']);
+Route::get('bank_accounts/{id}', [BankAccountController::class, 'show']);
+Route::put('bank_accounts/{id}', [BankAccountController::class, 'update']);
+Route::delete('bank_accounts/{id}', [BankAccountController::class, 'destroy']);
