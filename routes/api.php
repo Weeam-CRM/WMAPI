@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\InvoiceController;
 use App\Http\Controllers\API\InvoiceItemController;
-use App\Http\Controllers\BankAccountController;
-use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\API\BankAccountController;
+use App\Http\Controllers\API\DeveloperController;
 
 
 /*
