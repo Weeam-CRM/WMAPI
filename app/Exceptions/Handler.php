@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +29,45 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        // Check if the request is an API request
+        if ($request->is('api/*') || $request->wantsJson() || $request->expectsJson()) {
+            // Handle authentication errors for API requests
+            if ($e instanceof AuthenticationException || $e instanceof UnauthorizedHttpException) {
+                return response()->json(['error' => 'Unauthenticated.'], 401);
+            }
+
+            // Handle token mismatch errors for API requests
+            if ($e instanceof TokenMismatchException) {
+                return response()->json(['error' => 'Token mismatch.'], 403);
+            }
+
+            // Handle other error responses for API requests
+            $response = parent::render($request, $e);
+
+            if ($response->isServerError() || $response->isClientError()) {
+                return response()->json(['error' => 'Server Error.'], $response->status());
+            }
+
+            return $response;
+        }
+
+        // For non-API (web) requests, handle errors differently
+        $response = parent::render($request, $e);
+
+        if (!app()->environment(['local', 'testing', 'development']) && in_array($response->status(), [500, 503, 404, 403])) {
+            return Inertia::render('Core/Error', ['status' => $response->status()])
+                ->toResponse($request)
+                ->setStatusCode($response->status());
+        } elseif ($response->status() === 419) {
+            return back()->with([
+                'message' => 'The page expired, please try again.',
+            ]);
+        }
+
+        return $response;
     }
 }
