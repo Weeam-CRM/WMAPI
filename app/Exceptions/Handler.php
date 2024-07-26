@@ -33,6 +33,7 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
+<<<<<<< Updated upstream
         // Check if the request is an API request
         if ($request->is('api/*') || $request->wantsJson() || $request->expectsJson()) {
             // Handle authentication errors for API requests
@@ -59,6 +60,15 @@ class Handler extends ExceptionHandler
         $response = parent::render($request, $e);
 
         if (!app()->environment(['local', 'testing', 'development']) && in_array($response->status(), [500, 503, 404, 403])) {
+=======
+        if ($e instanceof AuthenticationException || $e instanceof UnauthorizedHttpException) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        $response = parent::render($request, $e);
+
+        if (! app()->environment(['local', 'testing', 'development']) && in_array($response->status(), [500, 503, 404, 403])) {
+>>>>>>> Stashed changes
             return Inertia::render('Core/Error', ['status' => $response->status()])
                 ->toResponse($request)
                 ->setStatusCode($response->status());
