@@ -10,7 +10,7 @@ class BankAccountController extends Controller
 {
     public function index()
     {
-        $bankAccounts = BankAccount::all();
+        $bankAccounts = BankAccount::orderBy('id', 'desc')->get();
         return response()->json($bankAccounts);
     }
 

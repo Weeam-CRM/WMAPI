@@ -12,7 +12,7 @@ class InvoiceController extends Controller
     public function index()
     {
         //$invoiceItems = Invoice::where('id','!=',null)->get();
-        $invoiceItems = Invoice::with(['developer', 'bankAccount'])->get();
+        $invoiceItems = Invoice::with(['developer', 'bankAccount'])->orderBy('id', 'desc')->get();
         return response()->json(['invoice_items' => $invoiceItems], 200);
     }
 

@@ -10,7 +10,7 @@ class DeveloperController extends Controller
 {
     public function index()
     {
-        $developers = Developer::all();
+        $developers = Developer::orderBy('id', 'desc')->get();
         return response()->json($developers);
     }
 
