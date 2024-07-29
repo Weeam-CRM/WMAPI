@@ -10,10 +10,8 @@ class InvoiceController extends Controller
 {
     public function index()
     {
-        // $invoices = auth()->user()->invoices()->orderBy('created_at', 'desc')->get();
-        // return response()->json(['invoices' => $invoices], 200);
-
-        $invoiceItems = Invoice::where('id','!=',null)->get();
+        //$invoiceItems = Invoice::where('id','!=',null)->get();
+        $invoiceItems = Invoice::with(['developer', 'bankAccount'])->get();
         return response()->json(['invoice_items' => $invoiceItems], 200);
     }
 
