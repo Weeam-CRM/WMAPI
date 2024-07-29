@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class InvoiceController extends Controller
 {
@@ -17,26 +18,29 @@ class InvoiceController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'invoice_number' => 'required|string',
             'invoice_date' => 'required|date',
             'total_amount' => 'required|numeric',
             'notes' => 'nullable|string',
         ]);
-
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
         /*$invoice = auth()->user()->invoices()->create($request->all());
 
         return response()->json(['invoice' => $invoice], 201);*/
 
         // Create a new invoice using only the request data
-        $invoice = Invoice::create([
-            'user_id' => 1,
-            'invoice_number' => $request->invoice_number,
-            'invoice_date' => $request->invoice_date,
-            'total_amount' => $request->total_amount,
-            'notes' => $request->notes,
-            // Add more fields as needed
-        ]);
+        // $invoice = Invoice::create([
+        //     'user_id' => 1,
+        //     'invoice_number' => $request->invoice_number,
+        //     'invoice_date' => $request->invoice_date,
+        //     'total_amount' => $request->total_amount,
+        //     'notes' => $request->notes,
+        //     // Add more fields as needed
+        // ]);
+        $invoice = Invoice::create($request->all());
 
         return response()->json(['invoice' => $invoice], 201);
     }
