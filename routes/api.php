@@ -7,7 +7,7 @@ use App\Http\Controllers\API\InvoiceController;
 use App\Http\Controllers\API\InvoiceItemController;
 use App\Http\Controllers\API\BankAccountController;
 use App\Http\Controllers\API\DeveloperController;
-
+use App\Http\Controllers\TransactionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +36,13 @@ Route::middleware('auth:sanctum')->group(function () {
 ## Invoices
 Route::apiResource('invoices', InvoiceController::class);
 Route::apiResource('invoices.items', InvoiceItemController::class);
+
+## Transactions
+Route::get('trasactions', [TransactionsController::class, 'index']);
+Route::post('trasactions', [TransactionsController::class, 'store']);
+Route::get('trasactions/{id}', [TransactionsController::class, 'show']);
+Route::put('trasactions/{id}', [TransactionsController::class, 'update']);
+Route::delete('trasactions/{id}', [TransactionsController::class, 'destroy']);
 
 ## Developers
 Route::get('developers', [DeveloperController::class, 'index']);

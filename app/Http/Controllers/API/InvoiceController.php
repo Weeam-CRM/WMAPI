@@ -27,19 +27,6 @@ class InvoiceController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-        /*$invoice = auth()->user()->invoices()->create($request->all());
-
-        return response()->json(['invoice' => $invoice], 201);*/
-
-        // Create a new invoice using only the request data
-        // $invoice = Invoice::create([
-        //     'user_id' => 1,
-        //     'invoice_number' => $request->invoice_number,
-        //     'invoice_date' => $request->invoice_date,
-        //     'total_amount' => $request->total_amount,
-        //     'notes' => $request->notes,
-        //     // Add more fields as needed
-        // ]);
         $invoice = Invoice::create($request->all());
 
         return response()->json(['invoice' => $invoice], 201);
