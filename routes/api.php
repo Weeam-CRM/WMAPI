@@ -38,11 +38,11 @@ Route::apiResource('invoices', InvoiceController::class);
 Route::apiResource('invoices.items', InvoiceItemController::class);
 
 ## Transactions
-Route::get('trasactions', [TransactionsController::class, 'index']);
-Route::post('trasactions', [TransactionsController::class, 'store']);
-Route::get('trasactions/{id}', [TransactionsController::class, 'show']);
-Route::put('trasactions/{id}', [TransactionsController::class, 'update']);
-Route::delete('trasactions/{id}', [TransactionsController::class, 'destroy']);
+Route::get('transactions', [TransactionsController::class, 'index']);
+Route::post('transactions', [TransactionsController::class, 'store']);
+Route::get('transactions/{id}', [TransactionsController::class, 'show']);
+Route::put('transactions/{id}', [TransactionsController::class, 'update']);
+Route::delete('transactions/{id}', [TransactionsController::class, 'destroy']);
 
 ## Developers
 Route::get('developers', [DeveloperController::class, 'index']);
