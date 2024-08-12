@@ -34,7 +34,7 @@ class InvoiceController extends Controller
 
     public function show($id)
     {
-        $invoice = Invoice::findOrFail($id);
+        $invoice = Invoice::with(['developer', 'bankAccount'])->findOrFail($id);
         return response()->json(['invoice' => $invoice], 200);
     }
 
