@@ -57,3 +57,9 @@ Route::post('bank_accounts', [BankAccountController::class, 'store']);
 Route::get('bank_accounts/{id}', [BankAccountController::class, 'show']);
 Route::put('bank_accounts/{id}', [BankAccountController::class, 'update']);
 Route::delete('bank_accounts/{id}', [BankAccountController::class, 'destroy']);
+
+## Call Logs
+Route::get('all-user-calls', 'call_logs_users');
+Route::post('upsert', 'upsert');
+Route::get('/userLogs/{id}', 'userLogs');
+Route::get('callLogs', 'callLogs');
