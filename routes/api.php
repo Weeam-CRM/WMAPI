@@ -6,8 +6,10 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\InvoiceController;
 use App\Http\Controllers\API\InvoiceItemController;
 use App\Http\Controllers\API\BankAccountController;
+use App\Http\Controllers\API\CallsLogController;
 use App\Http\Controllers\API\DeveloperController;
 use App\Http\Controllers\TransactionsController;
+use App\Models\Call_logs;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +61,7 @@ Route::put('bank_accounts/{id}', [BankAccountController::class, 'update']);
 Route::delete('bank_accounts/{id}', [BankAccountController::class, 'destroy']);
 
 ## Call Logs
-Route::get('all-user-calls', 'call_logs_users');
-Route::post('upsert', 'upsert');
-Route::get('/userLogs/{id}', 'userLogs');
-Route::get('callLogs', 'callLogs');
+Route::get('all-user-calls', [CallsLogController::class, 'call_logs_users']);
+Route::post('upsert', [CallsLogController::class, 'upsert']);
+Route::get('/userLogs/{id}', [CallsLogController::class, 'userLogs']);
+Route::get('callLogs', [CallsLogController::class, 'callLogs']);
