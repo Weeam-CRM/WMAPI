@@ -34,7 +34,7 @@ class InvoiceController extends Controller
 
     public function show($id)
     {
-        $invoice = auth()->user()->invoices()->findOrFail($id);
+        $invoice = Invoice::findOrFail($id);
         return response()->json(['invoice' => $invoice], 200);
     }
 
@@ -47,15 +47,16 @@ class InvoiceController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        $invoice = auth()->user()->invoices()->findOrFail($id);
+        $invoice = Invoice::findOrFail($id);
         $invoice->update($request->all());
 
         return response()->json(['invoice' => $invoice], 200);
+
     }
 
     public function destroy($id)
     {
-        $invoice = auth()->user()->invoices()->findOrFail($id);
+        $invoice = Invoice::findOrFail($id);
         $invoice->delete();
 
         return response()->json(['message' => 'Invoice deleted successfully'], 200);
