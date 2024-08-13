@@ -292,7 +292,8 @@ class CallsLogController extends Controller
             //'dateTime' => $value['dateTime'] ?? '',
             'duration' => $value['duration'] ?? null,
             'status' => $value['status'] ?? '',
-            'user_id' => Auth::user()->id ]);
+            //'user_id' => Auth::user()->id,
+            'user_id' => $request->user_id ]);
            //$quries = DB::getQueryLog();
         }
 
