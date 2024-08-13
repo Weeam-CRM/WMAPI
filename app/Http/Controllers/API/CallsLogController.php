@@ -55,8 +55,8 @@ class CallsLogController extends Controller
         }
 
         $period = Carbon::now()->year;
-        $user_id = Auth::user()->id;
-        $userrole = Auth::user()->role;
+        $user_id = $request->user_id;
+        $userrole = $request->user_role;
         //$agency = Auth::user()->agency;
         $today = Carbon::now($timezone)->toDateString();
         $yesterday = Carbon::yesterday($timezone)->toDateString();
