@@ -167,7 +167,7 @@ class CallsLogController extends Controller
         DB::enableQueryLog();
         $call_logs = User::query()
             ->join('call_logs', 'users.id', '=', 'call_logs.user_id')
-            ->select('users.id', 'users.userName', 'users.profile_picture', 'users.role')
+            ->select('users.id')
             ->selectRaw('COUNT(DISTINCT call_logs.phone) as all_calls')
             ->selectRaw('COUNT(DISTINCT CASE WHEN call_logs.status = "Dialed call" THEN call_logs.phone END) as dialed')
             ->selectRaw('COUNT(DISTINCT CASE WHEN call_logs.status = "Recieved call" THEN call_logs.phone END) as received')
@@ -207,14 +207,6 @@ class CallsLogController extends Controller
             } catch (\Exception $e) {
                 Log::error("Failed to publish WebSocket event: {$e->getMessage()}");
             }
-            // // Emit a websocket event with the new call logs data
-            // $channelName = 'call-logs'; // Replace with your desired channel name
-            // $eventName = 'new-call-logs'; // Replace with your desired event name
-            // $payload = json_encode($call_logs);
-            // Redis::publish("channel-{$channelName}", json_encode([
-            //     'event' => $eventName,
-            //     'data' => $payload,
-            // ]));
 
             $quries = DB::getQueryLog();
         return response()->json([
