@@ -208,10 +208,10 @@ class CallsLogController extends Controller
                 Log::error("Failed to publish WebSocket event: {$e->getMessage()}");
             }
 
-            $quries = DB::getQueryLog();
+            //$quries = DB::getQueryLog();
         return response()->json([
             'message' => 'Success',
-            'query'=> $quries,
+            //'query'=> $quries,
             'call_logs' => $call_logs
         ]);
     }
