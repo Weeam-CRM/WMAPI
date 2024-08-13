@@ -8,7 +8,7 @@ use App\Http\Resources\Call_logsResource;
 use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
-use Dotenv\Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
