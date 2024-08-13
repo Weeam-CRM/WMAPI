@@ -46,9 +46,9 @@ class CallsLogController extends Controller
     {
 
         $timezone = 'Asia/Dubai';
-        if(Auth::user()->timezone){
-           // $timezone = Auth::user()->timezone;
-        }
+        // if(Auth::user()->timezone){
+        //    // $timezone = Auth::user()->timezone;
+        // }
         $year = Carbon::now($timezone)->year;
         if($request->has('year')){
             $year = $request->year;
