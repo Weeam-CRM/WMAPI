@@ -269,6 +269,7 @@ class CallsLogController extends Controller
             '*.dateTime' => 'required|date_format:Y-m-d H:i:s',
             '*.duration' => 'required',
             '*.phone' => 'required',
+            '*.user_id' => 'required',
 
         ]);
         if($validator->fails()){
@@ -293,10 +294,9 @@ class CallsLogController extends Controller
             'duration' => $value['duration'] ?? null,
             'status' => $value['status'] ?? '',
             //'user_id' => Auth::user()->id,
-            'user_id' => $request->user_id ]);
+            'user_id' => $value['user_id'] ?? '' ]);
            //$quries = DB::getQueryLog();
         }
-
         //return $data;
         //$logs = Call_logs::upsert($data, ['dateTime', 'user_id'], ['user_id','lead_id','phone','recording','dateTime','duration','status']
         //);
