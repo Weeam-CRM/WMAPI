@@ -176,10 +176,10 @@ class CallsLogController extends Controller
             ->selectRaw('COUNT(DISTINCT CASE WHEN call_logs.status = "Missed call" THEN call_logs.phone END) as missed')
             ->selectRaw('COUNT(DISTINCT CASE WHEN call_logs.status = "Rejected call" THEN call_logs.phone END) as rejected')
             ->selectRaw('COUNT(DISTINCT call_logs.phone) as unique_lead_contacts')
-            ->where('users.agency', 1)
-            ->where('users.status', 1)
-            ->where('users.role', 7)
-            ->groupBy('users.id', 'users.userName', 'users.profile_picture', 'users.role');
+            //->where('users.agency', 1)
+            //->where('users.status', 1)
+            //->where('users.role', 7)
+            ->groupBy('users.id');
             if($request->period=='daily'){
                 $call_logs = $call_logs->whereDate('call_logs.dateTime', '>=', $today);
             }
