@@ -273,7 +273,12 @@ class CallsLogController extends Controller
         ]);
         if($validator->fails()){
 
-            return $this->sendError('Validation Error.', $validator->errors());
+            return response()->json([
+                'status' => false,
+                'message' => "cannot upload the data !",
+                'error' => $validator->errors()
+            ], 200);
+            //return $this->sendError('Validation Error.', $validator->errors());
 
         }
 
@@ -328,7 +333,11 @@ class CallsLogController extends Controller
         $Call_logs = Call_logs::find($id);
 
         if (is_null($Call_logs)) {
-            return $this->sendError('No call history found.');
+            return response()->json([
+                'status' => false,
+                'message' => "Not Found !",
+            ], 200);
+           // return $this->sendError('No call history found.');
         }
 
         return $this->sendResponse(new Call_logsResource($Call_logs), 'Log retrieved successfully.');
@@ -366,8 +375,12 @@ class CallsLogController extends Controller
 
        // dd($request->all());
         if($validator->fails()){
-
-            return $this->sendError('Validation Error.', $validator->errors());
+            return response()->json([
+                'status' => false,
+                'message' => "cannot update the data !",
+                'error' => $validator->errors()
+            ], 200);
+            //return $this->sendError('Validation Error.', $validator->errors());
 
         }
 
