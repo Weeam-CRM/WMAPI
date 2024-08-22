@@ -8,6 +8,7 @@ use App\Http\Controllers\API\InvoiceItemController;
 use App\Http\Controllers\API\BankAccountController;
 use App\Http\Controllers\API\CallsLogController;
 use App\Http\Controllers\API\DeveloperController;
+use App\Http\Controllers\API\EmployeesController;
 use App\Http\Controllers\TransactionsController;
 use App\Models\Call_logs;
 
@@ -30,6 +31,15 @@ Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanct
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+## Employees
+
+Route::get('employees', [EmployeesController::class, 'index']);
+Route::post('employees', [EmployeesController::class, 'store']);
+Route::get('employees/{id}', [EmployeesController::class, 'show']);
+Route::post('employees/{id}', [EmployeesController::class, 'update']);
+Route::delete('employees/{id}', [EmployeesController::class, 'destroy']);
+
 #invoice routes
 Route::middleware('auth:sanctum')->group(function () {
     // Route::apiResource('invoices', InvoiceController::class);
